@@ -1,0 +1,387 @@
+body {
+  text-align: center;
+  background-color: #283149;
+  color: #DBEDF3;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+
+h1 {
+  font-size: 4.5rem;
+  margin: 20px 0 5px;
+  color: #DBEDF3;
+  font-family: "Arvo", cursive;
+  text-shadow: 3px 0 #DA0463;
+}
+
+
+.subtitle {
+  margin-top: 0;
+  color: #b9cbd3;
+}
+
+
+/* -----------------------------
+   DRUM BUTTONS
+----------------------------- */
+
+.set {
+  margin: 35px auto;
+  max-width: 1100px;
+
+  display: flex;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+}
+
+
+.drum {
+
+  outline: none;
+
+  border: 8px solid #404B69;
+
+  font-size: 3rem;
+
+  font-family: 'Arvo', cursive;
+
+  line-height: 1;
+
+  font-weight: 900;
+
+  color: #DA0463;
+
+  text-shadow: 2px 0 #DBEDF3;
+
+  border-radius: 15px;
+
+  width: 125px;
+
+  height: 125px;
+
+  text-align: center;
+
+  margin: 8px;
+
+  background-color: white;
+
+  cursor: pointer;
+
+  transition: 0.08s;
+
+}
+
+
+.drum small {
+
+  display: block;
+
+  font-family: sans-serif;
+
+  font-size: 11px;
+
+  color: #283149;
+
+  text-shadow: none;
+
+  margin-top: 8px;
+
+}
+
+
+.drum:hover {
+
+  transform: translateY(-3px);
+
+}
+
+
+/* Button animation */
+
+.pressed {
+
+  box-shadow:
+    0 0 20px 4px #DBEDF3;
+
+  opacity: 0.55;
+
+  transform: scale(0.95);
+
+}
+
+
+/* New sounds */
+
+.q {
+  background-image:
+    linear-gradient(
+      135deg,
+      #f7f7f7,
+      #d9edf3
+    );
+}
+
+
+.e {
+  background-image:
+    linear-gradient(
+      135deg,
+      #f7f7f7,
+      #d9edf3
+    );
+}
+
+
+.z {
+  background-image:
+    linear-gradient(
+      135deg,
+      #f7f7f7,
+      #ffd9e8
+    );
+}
+
+
+.x {
+  background-image:
+    linear-gradient(
+      135deg,
+      #f7f7f7,
+      #e4dcff
+    );
+}
+
+
+/* Existing drum images */
+
+.w {
+  background-image:
+    url("images/tom1.png");
+}
+
+
+.a {
+  background-image:
+    url("images/tom2.png");
+}
+
+
+.s {
+  background-image:
+    url("images/tom3.png");
+}
+
+
+.d {
+  background-image:
+    url("images/tom4.png");
+}
+
+
+.j {
+  background-image:
+    url("images/snare.png");
+}
+
+
+.k {
+  background-image:
+    url("images/crash.png");
+}
+
+
+.l {
+  background-image:
+    url("images/kick.png");
+}
+
+
+
+/* -----------------------------
+   SONG + RECORDING BOXES
+----------------------------- */
+
+.song-box,
+.record-box {
+
+  max-width: 850px;
+
+  margin: 25px auto;
+
+  padding: 25px;
+
+  background: #20283d;
+
+  border: 2px solid #404B69;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 8px 20px
+    rgba(0,0,0,0.2);
+
+}
+
+
+.song-box h2,
+.record-box h2 {
+
+  margin-top: 0;
+
+  color: #DBEDF3;
+
+}
+
+
+/* -----------------------------
+   CONTROLS
+----------------------------- */
+
+.controls {
+
+  display: flex;
+
+  gap: 10px;
+
+  justify-content: center;
+
+  flex-wrap: wrap;
+
+  margin: 15px 0;
+
+}
+
+
+select,
+.controls button {
+
+  padding: 12px 18px;
+
+  border-radius: 8px;
+
+  border: none;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+}
+
+
+select {
+
+  min-width: 220px;
+
+}
+
+
+.controls button {
+
+  background: #DA0463;
+
+  color: white;
+
+}
+
+
+.controls button:hover {
+
+  opacity: 0.85;
+
+}
+
+
+/* -----------------------------
+   SPEED
+----------------------------- */
+
+.speed-label {
+
+  display: block;
+
+  margin-top: 20px;
+
+}
+
+
+#bpm {
+
+  width: 60%;
+
+  margin: 12px;
+
+}
+
+
+/* -----------------------------
+   SONG PATTERN
+----------------------------- */
+
+.pattern-area {
+
+  margin-top: 12px;
+
+  padding: 12px;
+
+  background: #151b2c;
+
+  border-radius: 8px;
+
+  font-family: monospace;
+
+  font-size: 18px;
+
+}
+
+
+#recordStatus {
+
+  color: #b9cbd3;
+
+}
+
+
+footer {
+
+  margin: 35px 0 10px;
+
+  color: #DBEDF3;
+
+}
+
+
+/* -----------------------------
+   MOBILE
+----------------------------- */
+
+@media (max-width: 700px) {
+
+  h1 {
+
+    font-size: 3rem;
+
+  }
+
+
+  .drum {
+
+    width: 95px;
+
+    height: 95px;
+
+    font-size: 2.2rem;
+
+  }
+
+
+  #bpm {
+
+    width: 90%;
+
+  }
+
+}

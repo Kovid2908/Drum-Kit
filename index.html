@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drum Kit</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
+</head>
+<body>
+
+  <h1 id="title">Drum 🥁 Kit</h1>
+  <p class="subtitle">Press the keys or click the drums to play</p>
+
+  <div class="set">
+
+    <button class="q drum">q<small>Hi-Hat</small></button>
+
+    <button class="w drum">w<small>Tom 1</small></button>
+
+    <button class="e drum">e<small>Open Hat</small></button>
+
+    <button class="a drum">a<small>Tom 2</small></button>
+
+    <button class="s drum">s<small>Tom 3</small></button>
+
+    <button class="d drum">d<small>Tom 4</small></button>
+
+    <button class="j drum">j<small>Snare</small></button>
+
+    <button class="k drum">k<small>Crash</small></button>
+
+    <button class="l drum">l<small>Kick</small></button>
+
+    <button class="z drum">z<small>Clap</small></button>
+
+    <button class="x drum">x<small>Ride</small></button>
+
+  </div>
+
+
+  <!-- SONG MODE -->
+
+  <section class="song-box">
+
+    <h2>🎵 Song Mode</h2>
+
+    <p>
+      Choose a popular song and play a simplified drum pattern.
+    </p>
+
+    <div class="controls">
+
+      <select id="songSelect">
+
+        <option value="believer">
+          Believer
+        </option>
+
+        <option value="shape">
+          Shape of You
+        </option>
+
+        <option value="seven">
+          Seven Nation Army
+        </option>
+
+        <option value="wewillrock">
+          We Will Rock You
+        </option>
+
+        <option value="dust">
+          Another One Bites The Dust
+        </option>
+
+      </select>
+
+      <button id="playSong">
+        ▶ Play Song
+      </button>
+
+      <button id="stopSong">
+        ⏹ Stop
+      </button>
+
+    </div>
+
+
+    <label class="speed-label">
+
+      Speed:
+      <span id="bpmValue">140</span>
+      BPM
+
+    </label>
+
+    <input
+      id="bpm"
+      type="range"
+      min="80"
+      max="220"
+      value="140"
+    >
+
+
+    <div class="pattern-area">
+
+      <strong>Pattern:</strong>
+
+      <span id="pattern">
+        k k l k | j k l
+      </span>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- RECORDING -->
+
+  <section class="record-box">
+
+    <h2>🔴 Record Your Beat</h2>
+
+    <div class="controls">
+
+      <button id="recordBtn">
+        ● Record
+      </button>
+
+      <button id="playRecording">
+        ▶ Play Recording
+      </button>
+
+      <button id="clearRecording">
+        ✕ Clear
+      </button>
+
+    </div>
+
+    <p id="recordStatus">
+      Not recording
+    </p>
+
+  </section>
+
+
+
+  <footer>
+    Made with ❤️ using HTML, CSS & JavaScript
+  </footer>
+
+
+  <script src="index.js"></script>
+
+</body>
+</html>
