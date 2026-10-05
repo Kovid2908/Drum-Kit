@@ -1,387 +1,608 @@
-body {
-  text-align: center;
-  background-color: #283149;
-  color: #DBEDF3;
-  font-family: sans-serif;
-  margin: 0;
-  padding: 20px;
+/* =========================================================
+   DRUM KIT
+   Colours are defined once here so the whole page stays
+   consistent. Change them and everything updates.
+   ========================================================= */
+
+:root {
+  --paper: #f4f0e8;
+  --panel: #fffdf9;
+  --ink: #232a40;
+  --muted: #6b7289;
+  --line: #d9d2c3;
+  --navy: #283149;
+  --accent: #da0463;
+  --accent-dark: #b00350;
+  --brass: #d3ac45;
+  --brass-dark: #8c6c1b;
+
+  /* base size of one drum pad; scales down on small screens */
+  --s: clamp(62px, 17vw, 104px);
 }
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 24px 16px 40px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.45;
+}
+
+.wrap {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+
+/* ---------- Header ---------- */
+
+header {
+  text-align: center;
+  margin-bottom: 18px;
+}
 
 h1 {
-  font-size: 4.5rem;
-  margin: 20px 0 5px;
-  color: #DBEDF3;
-  font-family: "Arvo", cursive;
-  text-shadow: 3px 0 #DA0463;
+  display: inline-block;
+  margin: 0;
+  padding-bottom: 2px;
+  font-family: "Arvo", Georgia, serif;
+  font-size: 2.3rem;
+  border-bottom: 3px solid var(--accent);
+}
+
+.tagline {
+  margin: 10px 0 0;
+  color: var(--muted);
+}
+
+h2 {
+  margin: 0;
+  font-family: "Arvo", Georgia, serif;
+  font-size: 1.15rem;
 }
 
 
-.subtitle {
-  margin-top: 0;
-  color: #b9cbd3;
-}
+/* ---------- Toolbar (volume / tempo / metronome) ---------- */
 
-
-/* -----------------------------
-   DRUM BUTTONS
------------------------------ */
-
-.set {
-  margin: 35px auto;
-  max-width: 1100px;
-
+.toolbar {
   display: flex;
-
-  justify-content: center;
-
   flex-wrap: wrap;
-}
-
-
-.drum {
-
-  outline: none;
-
-  border: 8px solid #404B69;
-
-  font-size: 3rem;
-
-  font-family: 'Arvo', cursive;
-
-  line-height: 1;
-
-  font-weight: 900;
-
-  color: #DA0463;
-
-  text-shadow: 2px 0 #DBEDF3;
-
-  border-radius: 15px;
-
-  width: 125px;
-
-  height: 125px;
-
-  text-align: center;
-
-  margin: 8px;
-
-  background-color: white;
-
-  cursor: pointer;
-
-  transition: 0.08s;
-
-}
-
-
-.drum small {
-
-  display: block;
-
-  font-family: sans-serif;
-
-  font-size: 11px;
-
-  color: #283149;
-
-  text-shadow: none;
-
-  margin-top: 8px;
-
-}
-
-
-.drum:hover {
-
-  transform: translateY(-3px);
-
-}
-
-
-/* Button animation */
-
-.pressed {
-
-  box-shadow:
-    0 0 20px 4px #DBEDF3;
-
-  opacity: 0.55;
-
-  transform: scale(0.95);
-
-}
-
-
-/* New sounds */
-
-.q {
-  background-image:
-    linear-gradient(
-      135deg,
-      #f7f7f7,
-      #d9edf3
-    );
-}
-
-
-.e {
-  background-image:
-    linear-gradient(
-      135deg,
-      #f7f7f7,
-      #d9edf3
-    );
-}
-
-
-.z {
-  background-image:
-    linear-gradient(
-      135deg,
-      #f7f7f7,
-      #ffd9e8
-    );
-}
-
-
-.x {
-  background-image:
-    linear-gradient(
-      135deg,
-      #f7f7f7,
-      #e4dcff
-    );
-}
-
-
-/* Existing drum images */
-
-.w {
-  background-image:
-    url("images/tom1.png");
-}
-
-
-.a {
-  background-image:
-    url("images/tom2.png");
-}
-
-
-.s {
-  background-image:
-    url("images/tom3.png");
-}
-
-
-.d {
-  background-image:
-    url("images/tom4.png");
-}
-
-
-.j {
-  background-image:
-    url("images/snare.png");
-}
-
-
-.k {
-  background-image:
-    url("images/crash.png");
-}
-
-
-.l {
-  background-image:
-    url("images/kick.png");
-}
-
-
-
-/* -----------------------------
-   SONG + RECORDING BOXES
------------------------------ */
-
-.song-box,
-.record-box {
-
-  max-width: 850px;
-
-  margin: 25px auto;
-
-  padding: 25px;
-
-  background: #20283d;
-
-  border: 2px solid #404B69;
-
-  border-radius: 18px;
-
-  box-shadow:
-    0 8px 20px
-    rgba(0,0,0,0.2);
-
-}
-
-
-.song-box h2,
-.record-box h2 {
-
-  margin-top: 0;
-
-  color: #DBEDF3;
-
-}
-
-
-/* -----------------------------
-   CONTROLS
------------------------------ */
-
-.controls {
-
-  display: flex;
-
-  gap: 10px;
-
-  justify-content: center;
-
-  flex-wrap: wrap;
-
-  margin: 15px 0;
-
-}
-
-
-select,
-.controls button {
-
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
   padding: 12px 18px;
-
-  border-radius: 8px;
-
-  border: none;
-
-  font-weight: bold;
-
-  cursor: pointer;
-
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
 }
 
+.ctl {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+
+.ctl-name {
+  font-weight: 600;
+}
+
+.ctl input[type="range"] {
+  width: 130px;
+  accent-color: var(--accent);
+}
+
+.ctl output {
+  min-width: 4.6em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.beats {
+  display: flex;
+  gap: 5px;
+}
+
+.beat-dot {
+  display: grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  font-size: 0.7rem;
+  color: var(--muted);
+  background: #fff;
+  transition: background 0.05s, color 0.05s;
+}
+
+.beat-dot.on {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: #fff;
+}
+
+.beat-dot:first-child.on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+
+/* ---------- The kit ----------
+   The drum images have white backgrounds, so the kit sits on
+   a plain white surface and they blend in. */
+
+.kit {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 18px 0;
+  padding: 22px 12px 16px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-end;     /* labels line up along the bottom */
+  gap: clamp(6px, 2vw, 22px);
+}
+
+.pad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.art {
+  display: block;
+  width: var(--s);
+  height: var(--s);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  transition: transform 0.08s ease, filter 0.08s ease;
+}
+
+.pad:hover .art {
+  transform: translateY(-2px);
+}
+
+.pad:focus-visible {
+  outline: none;
+}
+
+.pad:focus-visible .art {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+/* the "pressed" look, added by JavaScript for 110ms on every hit */
+.pad.hit .art {
+  transform: scale(0.93);
+  filter: brightness(1.12) saturate(1.25);
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: var(--navy);
+  color: #fff;
+  font: 700 0.72rem ui-monospace, Menlo, Consolas, monospace;
+  transition: background 0.08s;
+}
+
+.pad.hit kbd {
+  background: var(--accent);
+}
+
+
+/* ---------- Drums that use your images ---------- */
+
+.crash .art {
+  height: calc(var(--s) * 1.45);
+  background-image: url("images/crash.png");
+}
+
+.tom1 .art { background-image: url("images/tom1.png"); }
+.tom2 .art { background-image: url("images/tom2.png"); }
+.tom3 .art { background-image: url("images/tom3.png"); }
+.tom4 .art { background-image: url("images/tom4.png"); }
+
+.snare .art { background-image: url("images/snare.png"); }
+
+.kick .art {
+  width: calc(var(--s) * 1.45);
+  height: calc(var(--s) * 1.45);
+  background-image: url("images/kick.png");
+}
+
+
+/* ---------- Drums drawn in CSS (no image files needed) ---------- */
+
+/* cymbals: a brass ellipse on a thin stand */
+.stand {
+  position: relative;
+  height: calc(var(--s) * 1.45);
+}
+
+.stand::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  bottom: 0;
+  width: 3px;
+  margin-left: -1.5px;
+  background: #aeb3c0;
+}
+
+.disc {
+  position: absolute;
+  left: 4%;
+  right: 4%;
+  top: 6%;
+  height: calc(var(--s) * 0.34);
+  border: 2px solid var(--brass-dark);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 40% 35%, #ecd07e, var(--brass) 70%);
+}
+
+/* little bell in the middle */
+.disc::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20%;
+  height: 40%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--brass-dark);
+  opacity: 0.45;
+}
+
+/* closed hi-hat = two plates close together, open = a visible gap */
+.hat .disc      { box-shadow: 0 4px 0 var(--brass-dark); }
+.open-hat .disc { box-shadow: 0 11px 0 var(--brass-dark); }
+
+.ride .disc {
+  left: -6%;
+  right: -6%;
+}
+
+/* clap and percussion: simple pads */
+.clap .art,
+.perc .art {
+  width: calc(var(--s) * 0.85);
+  height: calc(var(--s) * 0.85);
+  border-radius: 14px;
+  background: var(--navy);
+  box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+.perc .art {
+  background: var(--accent);
+}
+
+
+/* ---------- Panels (Song Mode / Recording) ---------- */
+
+.panel {
+  margin: 18px 0;
+  padding: 18px 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.pill {
+  padding: 3px 11px;
+  border-radius: 999px;
+  background: #ece6d8;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.pill[data-state="playing"]   { background: var(--navy);  color: #fff; }
+.pill[data-state="recording"] { background: var(--accent); color: #fff; }
+.pill[data-state="paused"]    { background: var(--brass); color: #3a2c05; }
+.pill[data-state="recorded"]  { background: #dbe9dc; color: #25502d; }
+
+
+/* ---------- Buttons and form controls ---------- */
+
+.btn {
+  padding: 8px 16px;
+  border: 1px solid var(--navy);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--navy);
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, transform 0.06s;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--navy);
+  color: #fff;
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.btn.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn.primary:hover:not(:disabled) {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.btn[aria-pressed="true"] {
+  background: var(--navy);
+  color: #fff;
+}
+
+/* record button: red dot, turns solid while recording */
+.btn.rec::before {
+  content: "";
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.btn.rec.is-recording {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn.rec.is-recording:hover:not(:disabled) {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+}
+
+.btn.rec.is-recording::before {
+  background: #fff;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.25; }
+}
 
 select {
+  max-width: 100%;
+  min-width: 260px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
 
-  min-width: 220px;
+.transport {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0;
+}
 
+.loop {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.loop input {
+  accent-color: var(--accent);
+}
+
+.position {
+  margin-left: auto;
+  color: var(--muted);
+  font: 0.85rem ui-monospace, Menlo, Consolas, monospace;
 }
 
 
-.controls button {
+/* ---------- Song info + rhythm grid ---------- */
 
-  background: #DA0463;
-
-  color: white;
-
+.now-title {
+  font-family: "Arvo", Georgia, serif;
+  font-size: 1.25rem;
 }
 
-
-.controls button:hover {
-
-  opacity: 0.85;
-
+.now-meta {
+  color: var(--muted);
+  font-size: 0.88rem;
 }
 
-
-/* -----------------------------
-   SPEED
------------------------------ */
-
-.speed-label {
-
-  display: block;
-
-  margin-top: 20px;
-
-}
-
-
-#bpm {
-
-  width: 60%;
-
-  margin: 12px;
-
-}
-
-
-/* -----------------------------
-   SONG PATTERN
------------------------------ */
-
-.pattern-area {
-
-  margin-top: 12px;
-
-  padding: 12px;
-
-  background: #151b2c;
-
+.sequence {
+  padding: 10px;
+  overflow-x: auto;           /* scrolls sideways on small screens */
+  background: #f1ece1;
+  border: 1px solid var(--line);
   border-radius: 8px;
-
-  font-family: monospace;
-
-  font-size: 18px;
-
 }
 
+.lane {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin: 3px 0;
+}
 
-#recordStatus {
+.lane-name {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  flex: none;
+  width: 84px;
+  padding-right: 6px;
+  background: #f1ece1;
+  font-size: 0.76rem;
+  color: var(--muted);
+}
 
-  color: #b9cbd3;
+.cells {
+  display: flex;
+}
 
+.cell {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 22px;
+  margin-right: 2px;
+  border-radius: 3px;
+  background: #e2dbcb;
+  color: transparent;
+  font: 700 0.62rem ui-monospace, Menlo, Consolas, monospace;
+}
+
+.cell.beat-start { margin-left: 5px; }
+.cell.bar-start  { margin-left: 16px; }
+
+.cell.ruler {
+  height: 14px;
+  background: none;
+  color: var(--muted);
+  font-weight: 400;
+}
+
+.cell.on {
+  color: #fff;
+  background: var(--navy);
+}
+
+.cell.on.normal { opacity: 0.8; }
+.cell.on.ghost  { opacity: 0.4; }
+
+/* the column that is playing right now */
+.cell.now          { background: #cfc6b0; }
+.cell.ruler.now    { background: none; color: var(--accent); font-weight: 700; }
+.cell.on.now       { background: var(--accent); opacity: 1; }
+
+.legend {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.82rem;
 }
 
 
 footer {
-
-  margin: 35px 0 10px;
-
-  color: #DBEDF3;
-
+  margin-top: 30px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 
-/* -----------------------------
-   MOBILE
------------------------------ */
+/* ---------- Small screens ---------- */
 
-@media (max-width: 700px) {
+@media (max-width: 600px) {
+
+  body {
+    padding: 16px 10px 32px;
+  }
 
   h1 {
-
-    font-size: 3rem;
-
+    font-size: 1.9rem;
   }
 
-
-  .drum {
-
-    width: 95px;
-
-    height: 95px;
-
-    font-size: 2.2rem;
-
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
   }
 
-
-  #bpm {
-
-    width: 90%;
-
+  .ctl input[type="range"] {
+    flex: 1;
+    width: auto;
   }
 
+  .metro {
+    justify-content: space-between;
+  }
+
+  .panel {
+    padding: 16px 14px;
+  }
+
+  select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .position {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .cell {
+    width: 16px;
+  }
+
+  .lane-name {
+    width: 72px;
+  }
 }

@@ -8,151 +8,174 @@
   <link href="https://fonts.googleapis.com/css?family=Arvo" rel="stylesheet">
 </head>
 <body>
+<div class="wrap">
 
-  <h1 id="title">Drum 🥁 Kit</h1>
-  <p class="subtitle">Press the keys or click the drums to play</p>
+  <header>
+    <h1>Drum Kit</h1>
+    <p class="tagline">Tap the drums or use the keys shown on them. Song Mode plays simplified beats for you.</p>
+  </header>
 
-  <div class="set">
 
-    <button class="q drum">q<small>Hi-Hat</small></button>
+  <!-- GLOBAL CONTROLS: volume, tempo, metronome -->
+  <section class="toolbar" aria-label="Volume, tempo and metronome">
 
-    <button class="w drum">w<small>Tom 1</small></button>
+    <label class="ctl">
+      <span class="ctl-name">Volume</span>
+      <input id="volume" type="range" min="0" max="100" value="80">
+      <output id="volumeValue">80</output>
+    </label>
 
-    <button class="e drum">e<small>Open Hat</small></button>
+    <label class="ctl">
+      <span class="ctl-name">Tempo</span>
+      <input id="tempo" type="range" min="50" max="220" value="120">
+      <output id="tempoValue">120 BPM</output>
+    </label>
 
-    <button class="a drum">a<small>Tom 2</small></button>
+    <div class="ctl metro">
+      <button id="metroBtn" class="btn" type="button" aria-pressed="false">Metronome: Off</button>
+      <div class="beats" aria-hidden="true">
+        <span class="beat-dot">1</span>
+        <span class="beat-dot">2</span>
+        <span class="beat-dot">3</span>
+        <span class="beat-dot">4</span>
+      </div>
+    </div>
 
-    <button class="s drum">s<small>Tom 3</small></button>
+  </section>
 
-    <button class="d drum">d<small>Tom 4</small></button>
 
-    <button class="j drum">j<small>Snare</small></button>
+  <!-- THE KIT: cymbals on top, toms in the middle, snare / kick / extras at the front -->
+  <main class="kit" aria-label="Drum kit">
 
-    <button class="k drum">k<small>Crash</small></button>
+    <div class="row cymbals">
 
-    <button class="l drum">l<small>Kick</small></button>
+      <button class="pad hat" data-key="q" type="button">
+        <span class="art stand"><span class="disc"></span></span>
+        <span class="label"><kbd>Q</kbd> Hi-Hat</span>
+      </button>
 
-    <button class="z drum">z<small>Clap</small></button>
+      <button class="pad open-hat" data-key="e" type="button">
+        <span class="art stand"><span class="disc"></span></span>
+        <span class="label"><kbd>E</kbd> Open Hat</span>
+      </button>
 
-    <button class="x drum">x<small>Ride</small></button>
+      <button class="pad crash" data-key="k" type="button">
+        <span class="art"></span>
+        <span class="label"><kbd>K</kbd> Crash</span>
+      </button>
 
-  </div>
+      <button class="pad ride" data-key="x" type="button">
+        <span class="art stand"><span class="disc"></span></span>
+        <span class="label"><kbd>X</kbd> Ride</span>
+      </button>
+
+    </div>
+
+    <div class="row toms">
+
+      <button class="pad tom1" data-key="w" type="button">
+        <span class="art"></span>
+        <span class="label"><kbd>W</kbd> Tom 1</span>
+      </button>
+
+      <button class="pad tom2" data-key="a" type="button">
+        <span class="art"></span>
+        <span class="label"><kbd>A</kbd> Tom 2</span>
+      </button>
+
+      <button class="pad tom3" data-key="s" type="button">
+        <span class="art"></span>
+        <span class="label"><kbd>S</kbd> Tom 3</span>
+      </button>
+
+      <button class="pad tom4" data-key="d" type="button">
+        <span class="art"></span>
+        <span class="label"><kbd>D</kbd> Tom 4</span>
+      </button>
+
+    </div>
+
+    <div class="row front">
+
+      <button class="pad snare" data-key="j" type="button">
+        <span class="art"></span>
+        <span class="label"><kbd>J</kbd> Snare</span>
+      </button>
+
+      <button class="pad kick" data-key="l" type="button">
+        <span class="art"></span>
+        <span class="label"><kbd>L</kbd> Kick</span>
+      </button>
+
+      <button class="pad clap" data-key="z" type="button">
+        <span class="art"></span>
+        <span class="label"><kbd>Z</kbd> Clap</span>
+      </button>
+
+      <button class="pad perc" data-key="c" type="button">
+        <span class="art"></span>
+        <span class="label"><kbd>C</kbd> Perc</span>
+      </button>
+
+    </div>
+
+  </main>
 
 
   <!-- SONG MODE -->
+  <section class="panel" aria-labelledby="songHeading">
 
-  <section class="song-box">
-
-    <h2>🎵 Song Mode</h2>
-
-    <p>
-      Choose a popular song and play a simplified drum pattern.
-    </p>
-
-    <div class="controls">
-
-      <select id="songSelect">
-
-        <option value="believer">
-          Believer
-        </option>
-
-        <option value="shape">
-          Shape of You
-        </option>
-
-        <option value="seven">
-          Seven Nation Army
-        </option>
-
-        <option value="wewillrock">
-          We Will Rock You
-        </option>
-
-        <option value="dust">
-          Another One Bites The Dust
-        </option>
-
-      </select>
-
-      <button id="playSong">
-        ▶ Play Song
-      </button>
-
-      <button id="stopSong">
-        ⏹ Stop
-      </button>
-
+    <div class="panel-head">
+      <h2 id="songHeading">Song Mode</h2>
+      <span id="songStatus" class="pill" data-state="stopped" aria-live="polite">Stopped</span>
     </div>
 
-
-    <label class="speed-label">
-
-      Speed:
-      <span id="bpmValue">140</span>
-      BPM
-
-    </label>
-
-    <input
-      id="bpm"
-      type="range"
-      min="80"
-      max="220"
-      value="140"
-    >
-
-
-    <div class="pattern-area">
-
-      <strong>Pattern:</strong>
-
-      <span id="pattern">
-        k k l k | j k l
-      </span>
-
+    <div class="song-pick">
+      <select id="songSelect" aria-label="Choose a song"></select>
     </div>
+
+    <div class="now">
+      <div id="songTitle" class="now-title"></div>
+      <div id="songMeta" class="now-meta"></div>
+    </div>
+
+    <div class="transport">
+      <button id="playBtn" class="btn primary" type="button">Play</button>
+      <button id="pauseBtn" class="btn" type="button">Pause</button>
+      <button id="stopBtn" class="btn" type="button">Stop</button>
+      <label class="loop"><input id="loopBox" type="checkbox" checked> Loop</label>
+      <span id="songPosition" class="position"></span>
+    </div>
+
+    <div id="sequence" class="sequence" aria-label="Rhythm pattern"></div>
+    <p class="legend">Each square is a 16th note, four squares make one beat. Darker = louder, lighter = ghost note. Tempo comes from the slider above.</p>
 
   </section>
-
 
 
   <!-- RECORDING -->
+  <section class="panel" aria-labelledby="recHeading">
 
-  <section class="record-box">
-
-    <h2>🔴 Record Your Beat</h2>
-
-    <div class="controls">
-
-      <button id="recordBtn">
-        ● Record
-      </button>
-
-      <button id="playRecording">
-        ▶ Play Recording
-      </button>
-
-      <button id="clearRecording">
-        ✕ Clear
-      </button>
-
+    <div class="panel-head">
+      <h2 id="recHeading">Record Your Beat</h2>
+      <span id="recStatus" class="pill" data-state="ready" aria-live="polite">Ready</span>
     </div>
 
-    <p id="recordStatus">
-      Not recording
-    </p>
+    <div class="transport">
+      <button id="recordBtn" class="btn rec" type="button">Record</button>
+      <button id="recPlayBtn" class="btn" type="button">Play</button>
+      <button id="recClearBtn" class="btn" type="button">Clear</button>
+    </div>
+
+    <p class="legend">Press Record, play the drums, press Stop. Timing between your hits is kept. Turn the metronome on to stay in time.</p>
 
   </section>
 
 
+  <footer>Made with HTML, CSS and JavaScript</footer>
 
-  <footer>
-    Made with ❤️ using HTML, CSS & JavaScript
-  </footer>
+</div>
 
-
-  <script src="index.js"></script>
-
+<script src="index.js"></script>
 </body>
 </html>
